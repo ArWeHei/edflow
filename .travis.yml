@@ -3,7 +3,6 @@ python:
   - 3.6
   
 script: "sbt clean coverage test"
-
 after_success: "sbt coveralls"
 
 notifications:
