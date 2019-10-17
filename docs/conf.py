@@ -15,6 +15,27 @@ import sys
 
 sys.path.insert(0, os.path.abspath(".."))
 
+def run_apidoc(_):
+    argv = [
+        "-f",
+        "-o", "./source/source_files",
+        "../edflow"
+    ]
+
+    try:
+        # Sphinx 1.7+
+        from sphinx.ext import apidoc
+        apidoc.main(argv)
+    except ImportError:
+        # Sphinx 1.6 (and earlier)
+        from sphinx import apidoc
+        argv.insert(0, apidoc.__file__)
+        apidoc.main(argv)
+
+
+def setup(app):
+    app.connect('builder-inited', run_apidoc)
+
 # -- Project information -----------------------------------------------------
 
 project = "EDFlow"
